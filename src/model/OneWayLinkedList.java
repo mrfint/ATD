@@ -4,13 +4,13 @@ package model;
 import java.util.Iterator;
 
 
-public class OneWayLinkedList implements 
-                                        ATD, Iterable{
+public class OneWayLinkedList<T> implements 
+                                        ATD<T>, Iterable<T>{
     private Node root = null;
     private int length = 0;
     
     @Override
-    public void addToStart(int x) {
+    public void addToStart(T x) {
         Node newnd  = new Node(x);
         newnd.setNext(root);
         root = newnd;
@@ -19,7 +19,7 @@ public class OneWayLinkedList implements
     }
 
     @Override
-    public void addToEnd(int x) {
+    public void addToEnd(T x) {
         Node newnd = new Node(x);
         if (root==null) {
                 root = newnd;        
@@ -37,7 +37,7 @@ public class OneWayLinkedList implements
     }
 
     @Override
-    public void addToPos(int pos, int x) {
+    public void addToPos(int pos, T x) {
         Node newnd = new Node(x);
         if (pos == 0){
                 newnd.setNext(root);
@@ -96,19 +96,19 @@ public class OneWayLinkedList implements
     }
 
     @Override
-    public void set(int pos, int x) {
+    public void set(int pos, T x) {
         check(pos);
         getNodeByPos(pos).setData(x);
     }
 
     @Override
-    public int get(int pos) {
+    public T get(int pos) {
         check(pos);
-        return getNodeByPos(pos).getData();
+        return (T)getNodeByPos(pos).getData();
     }
 
     @Override
-    public int find(int x) {
+    public int find(T x) {
         int res = -1;
        
         Node next = root;
@@ -121,12 +121,7 @@ public class OneWayLinkedList implements
     }
 
     @Override
-    public void sort() {
-        setArray(new int[]{0, 1, 2, 3, 4});   //  MOCK
-    }
-
-    @Override
-    public void setArray(int[] a) {
+    public void setArray(T[] a) {
         clear();
         Node prevNode = new Node(a[0]);
         length++;
@@ -138,19 +133,7 @@ public class OneWayLinkedList implements
                 prevNode = newNode;
         }
     }
-    @Override
-    public int[] toArray() {
-        int[] res = new int[length];
-        int counter = 0;
-        if(root!=null){
-            Node next = root;
-            for (int i = 0; i < length; i++) {
-                res[counter++] = next.getData();
-                next = next.getNext();
-            }
-        }
-        return res;
-    }
+
     public String toString(){
         if(root==null) return "";
        
@@ -165,7 +148,7 @@ public class OneWayLinkedList implements
     
     public boolean equals(Object ob){
         boolean res = true;
-        int[] o = (int[])ob;
+        T[] o = (T[])ob;
         if(length!=o.length) return false;
         
         if(root==null) return false;
@@ -196,31 +179,50 @@ public class OneWayLinkedList implements
         }
         return fnd;
     }
+    public Iterator<T> iterator() {
+        return new ATDIterator<T>(this);
+    }
+
     @Override
-    public Iterator iterator() {
-        return new ATDIterator(this);
+    public T[] toArray() {
+        T[] res = (T[]) new Object[size()];
+        int counter = 0;
+        if(root!=null){
+            Node next = root;
+            for (int i = 0; i < length; i++) {
+                res[counter++] = (T)next.getData();
+                next = next.getNext();
+            }
+        }
+        return res;
+        
+    }
+
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
-     class Node{
+     class Node<T>{
             
-            private Integer data;
-            private Node next;
+            private T data;
+            private Node<T> next;
 
-            public Node(int data) {
+            public Node(T data) {
                 this.data = data;
             }
 
-            public Node(int data, Node next) {
+            public Node(T data, Node next) {
                 this.data = data;
                 this.next = next;
             }
 
 
-            public int getData() {
-                return data;
+            public T getData() {
+                return  (T) data;
             }
 
-            public void setData(int data) {
+            public void setData(T data) {
                 this.data = data;
             }
 

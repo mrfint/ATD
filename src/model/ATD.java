@@ -1,19 +1,21 @@
 
 package model;
 
-interface ATD {
-    void addToStart(int x);
-    void addToEnd(int x);
-    void addToPos(int pos, int x);
+interface ATD <T> {
+    void addToStart(T x);
+    void addToEnd(T x);
+    void addToPos(int pos, T x);
     void delFromStart();
     void delFromEnd();
     void del(int pos);
     int  size();
     void clear();
-    void set(int pos, int x);
-    int  get(int pos);
-    int  find(int x);
+    void set(int pos, T x);
+    <T> T get(int pos);
+    int  find(T x);
     void sort();
-    void  setArray(int[] a);
-    int[] toArray();
+    void setArray(T[] a);
+    T[] toArray();
+    
+    
 }

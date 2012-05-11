@@ -23,7 +23,7 @@ public class CycleArrayList implements ATD{
     }
     
     @Override
-    public void addToStart(int x) {
+    public void addToStart(T x) {
         checkBorders();
         a[countLeft] = x;
         if(countLeft-1 == -1) countLeft = n-1;
@@ -33,7 +33,7 @@ public class CycleArrayList implements ATD{
     
 
     @Override
-    public void addToEnd(int x) {
+    public void addToEnd(T x) {
         checkBorders();
         a[countRight] = x;
         if(countRight+1 == n) countRight = 0;
@@ -42,7 +42,7 @@ public class CycleArrayList implements ATD{
     }
 
     @Override
-    public void addToPos(int pos, int x) { 
+    public void addToPos(int pos, T x) { 
         check(pos);
         checkBorders();
        
@@ -77,7 +77,7 @@ public class CycleArrayList implements ATD{
     }
 
     @Override
-    public void set(int pos, int x) {
+    public void set(int pos, T x) {
         check(pos);
         int indx = ((countLeft+1+pos) >= n)? (countLeft+1+pos)%n : countLeft+1+pos;
         a[indx] = x;
@@ -91,7 +91,7 @@ public class CycleArrayList implements ATD{
     }
 
     @Override
-    public int find(int x) {
+    public int find(T x) {
     return 4;           //              MOCK
     }
 
@@ -158,7 +158,7 @@ public class CycleArrayList implements ATD{
     }
 
     @Override
-    public void setArray(int[] x) {
+    public void setArray(T[] x) {
         if(x.length > n  ) {   n = x.length; a = new int[x.length]; }
         countLeft  = n-1;
         countRight = 0;

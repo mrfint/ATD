@@ -3,42 +3,41 @@ package model;
 
 import java.util.Iterator;
 
-public class FlowArrayList implements ATD, Iterable{
+public class FlowArrayList<T> implements ATD<T>, Iterable<T>{
     private int n = 102;
     private int countLeft  = n/2;
     private int countRight = n/2;
     
-    
-    private Integer[] a = new Integer[n];
+    private T[] a = (T[]) new Object[n];
 
     private void upBorderOfArray(){
         int s = size();
-        Integer[] b = new Integer[size()];
+        T[] b = (T[]) new Object[n];
         
         for (int i = countLeft; i < countLeft+size(); i++) {
             b[i-countLeft] = a[i];
         }
         
         n = (int) (n*1.2);
-        a = new Integer[n];
+        a = (T[]) new Object[n];
         setArray(b);
     }
     
     @Override
-    public void addToStart(int x) {
+    public void addToStart(T x) {
         checkBorders();
         a[--countLeft] = x;
     }
     
 
     @Override
-    public void addToEnd(int x) {
+    public void addToEnd(T x) {
         checkBorders();
         a[countRight++] = x;
     }
 
     @Override
-    public void addToPos(int pos, int x) { 
+    public void addToPos(int pos, T x) { 
         check(pos);
         checkBorders();
         
@@ -60,26 +59,23 @@ public class FlowArrayList implements ATD, Iterable{
 
     @Override
     public void clear() {
-        a = new Integer[100];
+        n = 100;
+        a = (T[]) new Object[n];
         countLeft  = n/2;
         countRight = n/2;
         
     }
 
     @Override
-    public void set(int pos, int x) {
+    public void set(int pos, T x) {
         check(pos);
         a[countLeft+pos] = x;
     }
 
-    @Override
-    public int get(int pos) {
-        check(pos);
-        return a[countLeft+pos];
-    }
+   
 
     @Override
-    public int find(int x) {
+    public int find(T x) {
         int res = -1;
         for (int i = countLeft; i < countLeft+size(); i++) {
             if(a[i]==x) { 
@@ -89,20 +85,10 @@ public class FlowArrayList implements ATD, Iterable{
         }
     return res;
     }
-
-    @Override
-    public void sort() {
-        for (int i = countLeft; i < size()-1 ; i++) 
-        {   for (int j = i+1; j < size(); j++){
-                if(a[i] > a[j]) {  int c = a[i];  a[i] = a[j];   a[j] = c;  }
-            }
-        }
-
-    }
     
     public boolean equals(Object ob){
         boolean res = true;
-        int[] o = (int[])ob;
+        T[] o = (T[])ob;
         if(size()!=o.length) return false;
         for (int i = countLeft; i < size(); i++) {
             if(a[i]!=o[i-countLeft]) { res = false;  break; }
@@ -136,24 +122,16 @@ public class FlowArrayList implements ATD, Iterable{
     }
 
     @Override
-    public void setArray(int[] x) {
+    public void setArray(T[] x) {
         clear();
-        if(x.length >= n  ) {   n =  (int) (x.length*1.2); a = new Integer[n]; }
-       
-        for (int i = x.length/2; i >= 0; i--){             addToStart(x[i]);  }
-        for (int i = x.length/2+1; i < x.length; i++){     addToEnd(x[i]);    }
-    }
-    
-    public void setArray(Integer[] x) {
-        clear();
-        if(x.length >= n  ) {   n =  (int) (x.length*1.2); a = new Integer[n]; }
+        if(x.length >= n  ) {   n =  (int) (x.length*1.2);  a = (T[]) new Object[n]; }
        
         for (int i = x.length/2; i >= 0; i--){             addToStart(x[i]);  }
         for (int i = x.length/2+1; i < x.length; i++){     addToEnd(x[i]);    }
     }
     @Override
-    public int[] toArray() {
-        int[] res = new int[size()];
+    public T[] toArray() {
+        T[] res = (T[]) new Object[n];
         int counter = 0;
         for (int i = countLeft; i < countRight; i++) {
             res[counter++] = a[i];
@@ -181,8 +159,20 @@ public class FlowArrayList implements ATD, Iterable{
     }
 
     @Override
-    public Iterator iterator() {
-        return new ATDIterator(this);
+    public Iterator<T> iterator() {
+        return new ATDIterator<T>(this);
     }
+
+    @Override
+    public T get(int pos) {
+        check(pos);
+        return a[countLeft+pos];
+    }
+
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 
 }

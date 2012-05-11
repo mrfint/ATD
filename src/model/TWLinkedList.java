@@ -9,7 +9,7 @@ public class TWLinkedList implements ATD{
     NodeTW last  = null;
 
     @Override
-    public void addToStart(int x) {
+    public void addToStart(T x) {
         NodeTW temp = new NodeTW(x);
         temp.setNext(first);
         if( first != null ) {	 first.setPrev(temp);       }
@@ -23,7 +23,7 @@ public class TWLinkedList implements ATD{
     }
 
     @Override
-    public void addToEnd(int x) {
+    public void addToEnd(T x) {
         NodeTW temp = new NodeTW(x);
         temp.setPrev(last);
 	if(last != null){       last.setNext(temp);          }
@@ -35,7 +35,7 @@ public class TWLinkedList implements ATD{
     }
 
     @Override
-    public void addToPos(int pos, int x) {
+    public void addToPos(int pos, T x) {
         check(pos);
         if(pos==0) addToStart(x);
         else{   
@@ -106,7 +106,7 @@ public class TWLinkedList implements ATD{
     }
 
     @Override
-    public void set(int pos, int x) {
+    public void set(int pos, T x) {
         check(pos);
         getNodeByPos(pos).setValue(x);
     }
@@ -118,7 +118,7 @@ public class TWLinkedList implements ATD{
     }
 
     @Override
-    public int find(int x) {
+    public int find(T x) {
         if(length==0) throw new ArrayIndexOutOfBoundsException();
         NodeTW fnd = first;
         int res = -1;
@@ -137,7 +137,7 @@ public class TWLinkedList implements ATD{
     }
 
     @Override
-    public void setArray(int[] a) {
+    public void setArray(T[] a) {
         clear();
         NodeTW prevNode = new NodeTW(a[0]);
         length++;

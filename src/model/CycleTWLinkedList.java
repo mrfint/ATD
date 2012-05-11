@@ -6,7 +6,7 @@ public class CycleTWLinkedList implements ATD{
     NodeTW first = null;
 
     @Override
-    public void addToStart(int x) {
+    public void addToStart(T x) {
         NodeTW temp = new NodeTW(x);
         
         if( first == null ) {	 
@@ -23,7 +23,7 @@ public class CycleTWLinkedList implements ATD{
     }
 
     @Override
-    public void addToEnd(int x) {
+    public void addToEnd(T x) {
         if (first == null){
                 addToStart(x);
         }else{
@@ -36,7 +36,7 @@ public class CycleTWLinkedList implements ATD{
     }
 
     @Override
-    public void addToPos(int pos, int x) {
+    public void addToPos(int pos, T x) {
         check(pos);
         
         if(pos==0) addToStart(x);
@@ -120,7 +120,7 @@ public class CycleTWLinkedList implements ATD{
     }
 
     @Override
-    public void set(int pos, int x) {
+    public void set(int pos, T x) {
         getNodeByPos(pos).setValue(x);
     }
 
@@ -130,7 +130,7 @@ public class CycleTWLinkedList implements ATD{
     }
 
     @Override
-    public int find(int x) {
+    public int find(T x) {
         if(length==0) throw new ArrayIndexOutOfBoundsException();
         NodeTW fnd = first;
         int res = -1;
@@ -149,7 +149,7 @@ public class CycleTWLinkedList implements ATD{
     }
 
     @Override
-    public void setArray(int[] a) {
+    public void setArray(T[] a) {
         if (a.length == 0){
                 return;
         }

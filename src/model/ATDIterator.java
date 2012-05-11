@@ -2,11 +2,11 @@ package model;
 
 import java.util.Iterator;
 
-public class ATDIterator implements Iterator{
-    private ATD items;
-    private int position;
+public class ATDIterator<T> implements Iterator<T>{
+    private ATD<T> items = null;
+    private int position = 0;
 
-    public ATDIterator(ATD items) {
+    public ATDIterator(ATD<T> items) {
         this.items = items;
     }
 
@@ -21,13 +21,13 @@ public class ATDIterator implements Iterator{
     }
 
     @Override
-    public Object next() {
+    public T next() {
         return items.get(position++);
         
     }
 
     @Override
     public void remove() {
-        items.del(position);
+        items.del(--position);
     }
 }

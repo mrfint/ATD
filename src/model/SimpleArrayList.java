@@ -1,3 +1,4 @@
+
 package model;
 
 public class SimpleArrayList implements ATD{
@@ -17,18 +18,18 @@ public class SimpleArrayList implements ATD{
     }
     
     @Override
-    public void addToStart(int x) {
+    public void addToStart(T x) {
         addToPos(0, x);
     }
     
 
     @Override
-    public void addToEnd(int x) {
-        addToPos(count+1, x);
+    public void addToEnd(T x) {
+        addToPos(count++, x);
     }
 
     @Override
-    public void addToPos(int pos, int x) {
+    public void addToPos(int pos, T x) {
         if (pos > count+1 || pos < 0 ) {       throw new ArrayIndexOutOfBoundsException();   }
         count++;
         if( count == (n-1) )  upBorderOfArray();
@@ -42,7 +43,7 @@ public class SimpleArrayList implements ATD{
 
     @Override
     public int size() {
-        return count+1;
+        return count;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class SimpleArrayList implements ATD{
     }
 
     @Override
-    public void set(int pos, int x) {
+    public void set(int pos, T x) {
         if (pos > count) {       throw new ArrayIndexOutOfBoundsException();   }
         a[pos] = x;
     }
@@ -64,7 +65,7 @@ public class SimpleArrayList implements ATD{
     }
 
     @Override
-    public int find(int x) {
+    public int find(T x) {
         int res = -1;
         for (int i = 0; i < size(); i++) {
             if(a[i]==x) { 
@@ -77,7 +78,7 @@ public class SimpleArrayList implements ATD{
 
     @Override
     public void sort() {
-        for (int i = 0; i < size()-1 ; i++) 
+        for (int i = 0; i < size() ; i++) 
         {   for (int j = i+1; j < size(); j++){
                 if(a[i] > a[j]) {  int c = a[i];  a[i] = a[j];   a[j] = c;  }
             }
@@ -118,7 +119,7 @@ public class SimpleArrayList implements ATD{
     }
 
     @Override
-    public void setArray(int[] x) {
+    public void setArray(T[] x) {
         clear();
         if(x.length > n  ) {   n = x.length; a = new int[x.length]; }
         count = x.length-1;
