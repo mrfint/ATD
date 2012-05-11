@@ -1,7 +1,7 @@
 
 package model;
 
-public class CycleTWLinkedList implements ATD{
+public class CycleTWLinkedList<T> implements ATD<T>{
     int length = 0;
     NodeTW first = null;
 
@@ -125,8 +125,8 @@ public class CycleTWLinkedList implements ATD{
     }
 
     @Override
-    public int get(int pos) {
-        return  getNodeByPos(pos).getValue();
+    public T get(int pos) {
+        return  (T) getNodeByPos(pos).getValue();
     }
 
     @Override
@@ -144,11 +144,6 @@ public class CycleTWLinkedList implements ATD{
     }
 
     @Override
-    public void sort() {
-        setArray(new int[]{0, 1, 2, 3, 4});   //  MOCK
-    }
-
-    @Override
     public void setArray(T[] a) {
         if (a.length == 0){
                 return;
@@ -160,13 +155,13 @@ public class CycleTWLinkedList implements ATD{
     }
     
     @Override
-    public int[] toArray() {
-        int[] res = new int[length];
+    public T[] toArray() {
+        T[] res = (T[]) new Object[size()];
         int counter = 0;
         if(first!=null){
             NodeTW next = first;
             for (int i = 0; i < length; i++) {
-                res[counter++] = next.getValue();
+                res[counter++] = (T) next.getValue();
                 next = next.getNext();
             }
         }
@@ -174,7 +169,7 @@ public class CycleTWLinkedList implements ATD{
     }
      public boolean equals(Object ob){
         boolean res = true;
-        int[] o = (int[])ob;
+        T[] o = (T[])ob;
         if(length!=o.length) return false;
         
         if(first==null)      return false;
@@ -223,6 +218,11 @@ public class CycleTWLinkedList implements ATD{
             count++;
         }
         return fnd;
+    }
+
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

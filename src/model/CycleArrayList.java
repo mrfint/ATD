@@ -1,24 +1,24 @@
 
 package model;
 
-public class CycleArrayList implements ATD{
+public class CycleArrayList<T> implements ATD<T>{
     private int n = 102;
     private int countLeft  = n-1;
     private int countRight = 0;
     
     
-    private int[] a = new int[n];
+    private T[] a = (T[]) new Object[n];
 
     private void upBorderOfArray(){
 
-        int[] b = new int[size()];
+        T[] b = (T[]) new Object[size()];
         
         for (int i = countLeft; i < countLeft+size(); i++) {
             b[i-countLeft] = a[i];
         }
         
         n = (int) (n*1.2);
-        a = new int[n];
+        a = (T[]) new Object[n];
         setArray(b);
     }
     
@@ -71,7 +71,8 @@ public class CycleArrayList implements ATD{
 
     @Override
     public void clear() {
-        a = new int[100];
+        n = 100;
+        a = (T[]) new Object[n];
         int countLeft  = n-1;
         int countRight = 0;
     }
@@ -84,7 +85,7 @@ public class CycleArrayList implements ATD{
     }
 
     @Override
-    public int get(int pos) {
+    public T get(int pos) {
         check(pos);
         int indx = ((countLeft+1+pos) >= n)? (countLeft+1+pos)%n : countLeft+1+pos;
         return a[indx];
@@ -94,20 +95,10 @@ public class CycleArrayList implements ATD{
     public int find(T x) {
     return 4;           //              MOCK
     }
-
-    @Override
-    public void sort() {
-        for (int i = countLeft; i < size()-1 ; i++) 
-        {   for (int j = i+1; j < size(); j++){
-                if(a[i] > a[j]) {  int c = a[i];  a[i] = a[j];   a[j] = c;  }
-            }
-        }
-
-    }
     
     @Override
-    public int[] toArray() {
-        int[] res = new int[size()];
+    public T[] toArray() {
+        T[] res = (T[]) new Object[size()];
         int counter = 0;
         for (int i = countLeft+1; i < n; i++) {
             res[counter++] = a[i];
@@ -120,7 +111,7 @@ public class CycleArrayList implements ATD{
     
     public boolean equals(Object ob){
         boolean res = true;
-        int[] o = (int[])ob;
+        T[] o = (T[])ob;
         if(size()!=o.length) return false;
         for (int i = countLeft+1; i < size(); i++) {
             if(a[i]!=o[i-countLeft]) { res = false;  break; }
@@ -159,7 +150,7 @@ public class CycleArrayList implements ATD{
 
     @Override
     public void setArray(T[] x) {
-        if(x.length > n  ) {   n = x.length; a = new int[x.length]; }
+        if(x.length > n  ) {   n = x.length; a = (T[]) new Object[x.length]; }
         countLeft  = n-1;
         countRight = 0;
         
@@ -186,6 +177,11 @@ public class CycleArrayList implements ATD{
        if ( countRight == countLeft ) {
             upBorderOfArray();     
         }
+    }
+
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

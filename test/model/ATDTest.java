@@ -21,7 +21,7 @@ public class ATDTest {
     public static Collection<Object[]> generateData()
     {
         Object[][] data = new Object[][] {
-                        { new SimpleArrayList()  }, 
+                    
                         { new FlowArrayList()    },
                         { new CycleArrayList()   },
                         { new OneWayLinkedList() },
@@ -146,14 +146,14 @@ public class ATDTest {
    //********************************************** Test Many 
     @Test
     public void testManySize(){
-        int[] b = new int[]{0, 1, 2, 3, 4};
+        Integer[] b = new Integer[]{0, 1, 2, 3, 4};
         c.setArray(b);
 
         assertEquals(b.length, c.size());
     }
     @Test
     public void testMenyGetZElement(){
-       int[] b = new int[]{0, 1, 2, 3, 4};
+       Integer[] b = new Integer[]{0, 1, 2, 3, 4};
        c.setArray(b);
        
        assertEquals(b[0], c.get(0));
@@ -161,12 +161,12 @@ public class ATDTest {
     
     @Test(expected=ArrayIndexOutOfBoundsException.class)
     public void testMenyGetSomeIlligElement(){
-       c.setArray(new int[]{0, 1, 2, 3, 4});
+       c.setArray(new Integer[]{0, 1, 2, 3, 4});
        c.get(90);
     }
     @Test
     public void testMenySetZElement(){
-       int[] b = new int[]{0, 1, 2, 3, 4};
+       Integer[] b = new Integer[]{0, 1, 2, 3, 4};
        c.setArray(b);
        c.set(0,100);
        b[0] = 100;
@@ -176,15 +176,15 @@ public class ATDTest {
     
     @Test(expected=ArrayIndexOutOfBoundsException.class)
     public void testMenySetSomeIlligElement(){
-       c.setArray(new int[]{0, 1, 2, 3, 4});
+       c.setArray(new Integer[]{0, 1, 2, 3, 4});
        c.set(90,10);
     }
     
     @Test
     public void testManyAddToStart(){
-       c.setArray(new int[]{0, 1, 2, 3, 4});
+       c.setArray(new Integer[]{0, 1, 2, 3, 4});
        c.addToStart(10);
-       int[] b = new int[]{10, 0, 1, 2, 3, 4};
+       Integer[] b = new Integer[]{10, 0, 1, 2, 3, 4};
        
        assertTrue(c.equals(b));
 
@@ -192,71 +192,72 @@ public class ATDTest {
     }
     @Test
     public void testManyAddToEnd(){
-       c.setArray(new int[]{0, 1, 2, 3, 4});
+       c.setArray(new Integer[]{0, 1, 2, 3, 4});
        c.addToEnd(10);
        
-       int[] b = new int[] {0, 1, 2, 3, 4, 10};
+       Integer[] b = new Integer[] {0, 1, 2, 3, 4, 10};
        assertTrue(c.equals(b));
    
     }
     @Test
     public void testManyAddToSomePos(){
-       c.setArray(new int[]{0, 1, 2, 3, 4});
+       c.setArray(new Integer[]{0, 1, 2, 3, 4});
        c.addToPos(2,10);
-       int[] b = new int[]{0, 1, 10, 2, 3, 4};
+       Integer[] b = new Integer[]{0, 1, 10, 2, 3, 4};
 
        assertTrue(c.equals(b));
     }
     @Test(expected=ArrayIndexOutOfBoundsException.class)
     public void testManyAddToSomeIlligPos(){
-       c.setArray(new int[]{0, 1, 2, 3, 4});
+       c.setArray(new Integer[]{0, 1, 2, 3, 4});
        c.addToPos(90,10);
     }
     @Test
     public void testManyDelFromStart(){
-       c.setArray(new int[]{10, 0, 1, 2, 3, 4});
+       c.setArray(new Integer[]{10, 0, 1, 2, 3, 4});
        c.delFromStart();
-       int[] b = new int[]{0, 1, 2, 3, 4};
+       Integer[] b = new Integer[]{0, 1, 2, 3, 4};
        assertTrue(c.equals(b));
     }
     @Test
     public void testManyDelFromEnd(){
-       c.setArray(new int[]{0, 1, 2, 3, 4, 10});
+       c.setArray(new Integer[]{0, 1, 2, 3, 4, 10});
        c.delFromEnd();
-       int[] b = new int[]{0, 1, 2, 3, 4};
+       Integer[] b = new Integer[]{0, 1, 2, 3, 4};
        assertTrue(c.equals(b));
     }
 
     @Test
     public void testManyDelFromAnyPos(){
-       c.setArray(new int[]{0, 1, 10, 2, 3, 4});
+       c.setArray(new Integer[]{0, 1, 10, 2, 3, 4});
        c.del(2);
-       int[] b = new int[]{0, 1, 2, 3, 4};
+       Integer[] b = new Integer[]{0, 1, 2, 3, 4};
        assertTrue(c.equals(b));
     }
     @Test(expected=ArrayIndexOutOfBoundsException.class)
     public void testManyDelFromAnyIllPos(){
-        c.setArray(new int[]{0, 1, 2, 3, 4});
+        c.setArray(new Integer[]{0, 1, 2, 3, 4});
         c.del(90);
     }
     @Test
     public void testManyEquals() {
-        c.setArray(new int[]{0, 1, 2, 3, 4});
-        assertArrayEquals(new int[]{0, 1, 2, 3, 4}, c.toArray());
+        c.setArray(new Integer[]{0, 1, 2, 3, 4});
+        assertArrayEquals(new Integer[]{0, 1, 2, 3, 4}, c.toArray());
     }
     
-    @Test
+    
+    @Test(expected=UnsupportedOperationException.class)
     public void sort() {
-        c.setArray(new int[]{4, 3, 2, 1, 0});
+        c.setArray(new Integer[]{4, 3, 2, 1, 0});
         c.sort();
 
-        int[] b = new int[]{0, 1, 2, 3, 4};
+        Integer[] b = new Integer[]{0, 1, 2, 3, 4};
         assertTrue(c.equals(b));
     }
     
     @Test
     public void find() {
-       c.setArray(new int[]{0, 1, 2, 3, 4});
+       c.setArray(new Integer[]{0, 1, 2, 3, 4});
 
        assertEquals(4,  c.find(4));
     }

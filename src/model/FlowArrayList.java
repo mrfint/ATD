@@ -124,14 +124,14 @@ public class FlowArrayList<T> implements ATD<T>, Iterable<T>{
     @Override
     public void setArray(T[] x) {
         clear();
-        if(x.length >= n  ) {   n =  (int) (x.length*1.2);  a = (T[]) new Object[n]; }
+        if(x.length >= n  ) {   n =  (int) (x.length*1.2);  a = (T[]) new Object[x.length]; }
        
         for (int i = x.length/2; i >= 0; i--){             addToStart(x[i]);  }
         for (int i = x.length/2+1; i < x.length; i++){     addToEnd(x[i]);    }
     }
     @Override
     public T[] toArray() {
-        T[] res = (T[]) new Object[n];
+        T[] res = (T[]) new Object[size()];
         int counter = 0;
         for (int i = countLeft; i < countRight; i++) {
             res[counter++] = a[i];

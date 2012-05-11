@@ -3,7 +3,7 @@ package model;
 
 
 
-public class TWLinkedList implements ATD{
+public class TWLinkedList<T> implements ATD<T>{
     int length = 0;
     NodeTW first = null;
     NodeTW last  = null;
@@ -112,9 +112,9 @@ public class TWLinkedList implements ATD{
     }
 
     @Override
-    public int get(int pos) {
+    public T get(int pos) {
         check(pos);
-        return getNodeByPos(pos).getValue();
+        return (T) getNodeByPos(pos).getValue();
     }
 
     @Override
@@ -129,11 +129,6 @@ public class TWLinkedList implements ATD{
             count++;
         }
         return res;
-    }
-
-    @Override
-    public void sort() {
-        setArray(new int[]{0, 1, 2, 3, 4});   //  MOCK
     }
 
     @Override
@@ -153,13 +148,13 @@ public class TWLinkedList implements ATD{
         last = prevNode;
     }
     @Override
-    public int[] toArray() {
-        int[] res = new int[length];
+    public T[] toArray() {
+        T[] res = (T[]) new Object[size()];
         int counter = 0;
         if(first!=null){
             NodeTW next = first;
             for (int i = 0; i < length; i++) {
-                res[counter++] = next.getValue();
+                res[counter++] = (T)next.getValue();
                 next = next.getNext();
             }
         }
@@ -168,7 +163,7 @@ public class TWLinkedList implements ATD{
     
      public boolean equals(Object ob){
         boolean res = true;
-        int[] o = (int[])ob;
+        T[] o = (T[])ob;
         if(length!=o.length) return false;
         
         if(first==null)      return false;
@@ -212,14 +207,19 @@ public class TWLinkedList implements ATD{
         return fnd;
     }
 
-}
-    class NodeTW{
-        private int value;
-        
-        private NodeTW next;
-        private NodeTW prev;
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-    public NodeTW(int value) {
+}
+    class NodeTW<T>{
+        private T value;
+        
+        private NodeTW<T> next;
+        private NodeTW<T> prev;
+
+    public NodeTW(T value) {
         this.value = value;
     }
 
@@ -240,11 +240,11 @@ public class TWLinkedList implements ATD{
     }
 
     
-    public int getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(T value) {
         this.value = value;
     }
 

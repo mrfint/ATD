@@ -1,15 +1,15 @@
 
 package model;
 
-public class SimpleArrayList implements ATD{
+public class SimpleArrayList<T> implements ATD<T>{
     private int count = -1;
     private int n = 100;
     
-    private int[] a = new int[n];
+    private T[] a = (T[]) new Object[n];
 
     private void upBorderOfArray(){
         int nn = (int) (n*1.2);
-        int[] b = new int[nn];
+        T[] b = (T[]) new Object[nn];
         for (int i = 0; i < n; i++) {
             b[i] = a[i];
         }
@@ -48,7 +48,8 @@ public class SimpleArrayList implements ATD{
 
     @Override
     public void clear() {
-        a = new int[100];
+        n = 100;
+        a = (T[]) new Object[n];
         count=0;
     }
 
@@ -59,7 +60,7 @@ public class SimpleArrayList implements ATD{
     }
 
     @Override
-    public int get(int pos) {
+    public T get(int pos) {
         if (pos > count) {       throw new ArrayIndexOutOfBoundsException();   }
         return a[pos];
     }
@@ -76,19 +77,10 @@ public class SimpleArrayList implements ATD{
     return res;
     }
 
-    @Override
-    public void sort() {
-        for (int i = 0; i < size() ; i++) 
-        {   for (int j = i+1; j < size(); j++){
-                if(a[i] > a[j]) {  int c = a[i];  a[i] = a[j];   a[j] = c;  }
-            }
-        }
-
-    }
     
     public boolean equals(Object ob){
         boolean res = true;
-        int[] o = (int[])ob;
+        T[] o = (T[])ob;
         if(size()!=o.length) return false;
         for (int i = 0; i < size(); i++) {
             if(a[i]!=o[i]) { res = false;  break; }
@@ -121,17 +113,17 @@ public class SimpleArrayList implements ATD{
     @Override
     public void setArray(T[] x) {
         clear();
-        if(x.length > n  ) {   n = x.length; a = new int[x.length]; }
+        if(x.length > n  ) {   n = x.length; a = (T[]) new Object[x.length];}
         count = x.length-1;
         for (int i = 0; i < x.length; i++){
                 a[i] = x[i];
         }
     }
     @Override
-    public int[] toArray() {
+    public T[] toArray() {
         if(size()==0) return null;
         
-        int[] res = new int[size()];
+        T[] res = (T[]) new Object[size()];
         for (int i = 0; i <= count; i++) {
             res[i] = a[i];
         }
@@ -148,6 +140,11 @@ public class SimpleArrayList implements ATD{
         }
        
         return "";
+    }
+
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
